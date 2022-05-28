@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Commit.Desktop (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Commit.Desktop (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
