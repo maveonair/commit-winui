@@ -15,9 +15,12 @@ jobs:
 
     runs-on: windows-latest
 
+    defaults:
+      run:
+        working-directory: .\src
+
     env:
       solution_name: Commit.sln
-      working_directory: ./src
 
     steps:
       - name: Checkout
@@ -35,13 +38,11 @@ jobs:
 
       - name: Execute unit tests
         run: dotnet test
-        working-directory: ${{ env.working_directory }}    
 
       - name: Restore the application
         run: msbuild $env:solution_name /t:Restore /p:Configuration=$env:Configuration
         env:
           Configuration: ${{ matrix.configuration }}
-        working-directory: ${{ env.working_directory }}         
 
       - name: Decode the pfx
         run: |
@@ -50,14 +51,13 @@ jobs:
           [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
 
       - name: Create the app package
-        run: msbuild $env:solution_name /p:Configuration=$env:Configuration /p:Platform=$env:Platform /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=../GitHubActionsWorkflow.pfx /p:AppxPackageDir="$env:Appx_Package_Dir" /p:GenerateAppxPackageOnBuild=true
+        run: msbuild $env:solution_name /p:Configuration=$env:Configuration /p:Platform=$env:Platform /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:AppxPackageDir="$env:Appx_Package_Dir" /p:GenerateAppxPackageOnBuild=true
         env:
           Appx_Bundle: Never
           Appx_Package_Build_Mode: SideloadOnly
           Appx_Package_Dir: Packages\
           Configuration: ${{ matrix.configuration }}
           Platform: ${{ matrix.platform }}
-        working-directory: ${{ env.working_directory }}       
 
       - name: Remove the pfx
         run: Remove-Item -path GitHubActionsWorkflow.pfx
@@ -66,5 +66,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: MSIX Package
-          path: ${{ env.working_directory }}\\Commit.Desktop\\Packages
-          
+          path: Commit.Desktop\\Packages
