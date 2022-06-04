@@ -68,5 +68,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: MSIX Package
-          path: ${{ env.working_directory }}\\Commit.App\\Packages
+          path: ${{ env.working_directory }}\\Commit.Desktop\\Packages
           
