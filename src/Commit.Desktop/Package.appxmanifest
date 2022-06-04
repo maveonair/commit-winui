@@ -10,7 +10,7 @@
 
 	<Identity
 	  Name="17acdeef-9146-44ca-a65a-c7009dd55f05"
-	  Publisher="CN=Fabian"
+	  Publisher="CN=Fabian Mettler"
 	  Version="1.0.0.0" />
 
 	<Properties>
