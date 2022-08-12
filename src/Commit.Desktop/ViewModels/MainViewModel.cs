@@ -13,7 +13,7 @@ namespace Commit.Desktop.ViewModels
     public partial class MainViewModel : ObservableObject
     {
         [ObservableProperty]
-        [AlsoNotifyChangeFor(nameof(CommitCommand))]
+        [NotifyPropertyChangedFor(nameof(CommitCommand))]
         private string message;
 
         private string _commitEditMessageFilePath;
