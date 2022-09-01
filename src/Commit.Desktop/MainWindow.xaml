@@ -10,7 +10,7 @@
     xmlns:behaviors="using:CommunityToolkit.WinUI.UI.Behaviors"
     mc:Ignorable="d">
 
-    <Grid>
+    <Grid Background="{ThemeResource PanelBackgroundBrush}">
         <Grid.DataContext>
             <vm:MainViewModel />
         </Grid.DataContext>
@@ -18,7 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="32" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />            
         </Grid.RowDefinitions>
 
         <Grid x:Name="AppTitleBar">
@@ -40,8 +40,10 @@
                  Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                  FontFamily="Consolas">
             <TextBox.Resources>
-                <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="Transparent" />
-                <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="Transparent" />
+                <Thickness x:Key="TextControlBorderThemeThickness">0</Thickness>
+                <Thickness x:Key="TextControlBorderThemeThicknessFocused">0</Thickness>
+                
+                <CornerRadius x:Key="ControlCornerRadius">0,0,0,0</CornerRadius>
             </TextBox.Resources>
 
             <interactivity:Interaction.Behaviors>
@@ -49,19 +51,25 @@
             </interactivity:Interaction.Behaviors>
         </TextBox>
 
-        <StackPanel Grid.Row="2" 
+        <Grid Grid.Row="2"
+                    HorizontalAlignment="Stretch"
+                    BorderThickness="0,1,0,0"
+                    BorderBrush="{ThemeResource PanelBorder}">
+            
+            <StackPanel
                     Orientation="Horizontal" 
                     Padding="15"
                     Spacing="15" 
-                    HorizontalAlignment="Center"
-                    >
-            <Button Command="{Binding AbortCommand}">
-                Abort
-            </Button>
-            <Button Command="{Binding CommitCommand}" 
+                    HorizontalAlignment="Center">
+                <Button Command="{Binding AbortCommand}">
+                    Abort
+                </Button>
+                <Button Command="{Binding CommitCommand}" 
                     Style="{StaticResource AccentButtonStyle}">
-                Commit
-            </Button>
-        </StackPanel>
+                    Commit
+                </Button>
+            </StackPanel>
+        </Grid>
+
     </Grid>
 </Window>

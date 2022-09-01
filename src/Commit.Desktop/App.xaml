@@ -9,7 +9,23 @@
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
                 <!-- Other merged dictionaries here -->
             </ResourceDictionary.MergedDictionaries>
-            <!-- Other app resources here -->
+
+            <Color x:Key="GrayLight">#e8e8e8</Color>
+            <Color x:Key="GrayLighter">#f3f3f3</Color>
+            
+            <Color x:Key="GrayDark">#272727</Color>
+            <Color x:Key="GrayDarker">#202020</Color>
+
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="PanelBackgroundBrush" Color="{StaticResource GrayLighter}"/>
+                    <SolidColorBrush x:Key="PanelBorder" Color="{StaticResource GrayLight}" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="PanelBackgroundBrush" Color="{StaticResource GrayDark}"/>
+                    <SolidColorBrush x:Key="PanelBorder" Color="{StaticResource GrayDarker}" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
