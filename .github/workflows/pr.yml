@@ -1,4 +1,4 @@
-name: Package WinUI 3 MSIX app
+name: PR Validation
 
 on: [pull_request]
 
