@@ -56,6 +56,7 @@ namespace Commit.Desktop.ViewModels
             catch (Exception e)
             {
                 // TODO: Error handling
+                Console.WriteLine(e.ToString());
             }
 
             App.Current.Exit();

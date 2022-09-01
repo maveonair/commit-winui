@@ -1,4 +1,6 @@
 ﻿using Commit.Desktop.ViewModels;
+using Microsoft.UI;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -11,6 +13,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -29,11 +32,21 @@ namespace Commit.Desktop
         public MainWindow()
         {
             this.InitializeComponent();
+            SetWindowIcon();
+            
             MainViewModel = new MainViewModel();
-
+            
             Title = "Commit";
 
             Activated += MainWindow_Activated;
+        }
+
+        private void SetWindowIcon()
+        {
+            var windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(this);
+            var windowId = Win32Interop.GetWindowIdFromWindow(windowHandle);
+            var appWindow = AppWindow.GetFromWindowId(windowId);
+            appWindow.SetIcon(Path.Combine(Package.Current.InstalledLocation.Path, "Assets", "appicon.ico"));
         }
 
         private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)
