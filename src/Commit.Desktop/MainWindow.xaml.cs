@@ -32,21 +32,17 @@ namespace Commit.Desktop
         public MainWindow()
         {
             this.InitializeComponent();
-            SetWindowIcon();
-            
+            SetTitleBar();
+
             MainViewModel = new MainViewModel();
-            
-            Title = "Commit";
 
             Activated += MainWindow_Activated;
         }
 
-        private void SetWindowIcon()
+        private void SetTitleBar()
         {
-            var windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(this);
-            var windowId = Win32Interop.GetWindowIdFromWindow(windowHandle);
-            var appWindow = AppWindow.GetFromWindowId(windowId);
-            appWindow.SetIcon(Path.Combine(Package.Current.InstalledLocation.Path, "Assets", "appicon.ico"));
+            ExtendsContentIntoTitleBar = true;
+            SetTitleBar(AppTitleBar);
         }
 
         private void MainWindow_Activated(object sender, WindowActivatedEventArgs args)

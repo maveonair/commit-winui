@@ -16,12 +16,25 @@
         </Grid.DataContext>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="32" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
+        <Grid x:Name="AppTitleBar">
+            <Image Source="Assets/Square44x44Logo.png"
+                   HorizontalAlignment="Left" 
+                   Width="16" Height="16" 
+                   Margin="8,0"/>
+            <TextBlock x:Name="AppTitleTextBlock" Text="Commit"
+                       TextWrapping="NoWrap"
+                       Style="{StaticResource CaptionTextBlockStyle}" 
+                       VerticalAlignment="Center"
+                       Margin="28,0,0,0"/>
+        </Grid>
+
         <TextBox x:Name="message" 
-                 Grid.Row="0" 
+                 Grid.Row="1" 
                  AcceptsReturn="True" 
                  IsSpellCheckEnabled="True" 
                  Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
@@ -36,7 +49,7 @@
             </interactivity:Interaction.Behaviors>
         </TextBox>
 
-        <StackPanel Grid.Row="1" 
+        <StackPanel Grid.Row="2" 
                     Orientation="Horizontal" 
                     Padding="15"
                     Spacing="15" 
